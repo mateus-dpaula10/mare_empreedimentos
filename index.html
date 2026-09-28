@@ -1132,7 +1132,7 @@
         </div>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsg').style.opacity=1;">
+        <form data-projeto="Site institucional" onsubmit="return enviarWhatsApp(event, this, 'formMsg');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1331,7 +1331,7 @@
         <p class="lead">Preencha seus dados e nossa equipe entra em contato com a tabela de vendas, plantas detalhadas e condições especiais de financiamento direto com a construtora.</p>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsgVenezza').style.opacity=1;">
+        <form data-projeto="Palazzo di Venezza 1034" onsubmit="return enviarWhatsApp(event, this, 'formMsgVenezza');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1481,7 +1481,7 @@
         <p class="lead">Preencha seus dados e nossa equipe entra em contato com fotos, plantas e condições especiais.</p>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsgMilano').style.opacity=1;">
+        <form data-projeto="Palazzo di Milano" onsubmit="return enviarWhatsApp(event, this, 'formMsgMilano');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1577,7 +1577,7 @@
         <p class="lead">Preencha seus dados e nossa equipe entra em contato com fotos, plantas e condições especiais.</p>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsgRoma').style.opacity=1;">
+        <form data-projeto="Palazzo di Roma" onsubmit="return enviarWhatsApp(event, this, 'formMsgRoma');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1673,7 +1673,7 @@
         <p class="lead">Preencha seus dados e nossa equipe entra em contato com fotos, plantas e condições especiais.</p>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsgVerona').style.opacity=1;">
+        <form data-projeto="Palazzo di Verona" onsubmit="return enviarWhatsApp(event, this, 'formMsgVerona');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1772,7 +1772,7 @@
         <p class="lead">Preencha seus dados e nossa equipe entra em contato com fotos, plantas e condições especiais.</p>
       </div>
       <div class="reveal">
-        <form onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsgDiamond').style.opacity=1;">
+        <form data-projeto="Complexo Diamond" onsubmit="return enviarWhatsApp(event, this, 'formMsgDiamond');">
           <div class="field">
             <label>Nome</label>
             <input type="text" required>
@@ -1818,6 +1818,26 @@
 </a>
 
 <script>
+  const WHATSAPP_NUMERO = '5551997121250';
+
+  function enviarWhatsApp(event, form, msgId) {
+    event.preventDefault();
+    const projeto = form.dataset.projeto || 'Mare Empreendimentos';
+    const linhas = [`Olá! Tenho interesse em ${projeto}.`, ''];
+    form.querySelectorAll('.field').forEach(field => {
+      const label = field.querySelector('label');
+      const campo = field.querySelector('input, select, textarea');
+      if (!label || !campo || !campo.value.trim()) return;
+      linhas.push(`${label.textContent.trim()}: ${campo.value.trim()}`);
+    });
+    const texto = encodeURIComponent(linhas.join('\n'));
+    window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${texto}`, '_blank');
+    form.reset();
+    const msg = document.getElementById(msgId);
+    if (msg) msg.style.opacity = 1;
+    return false;
+  }
+
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
     header.classList.toggle('solid', window.scrollY > 60);
