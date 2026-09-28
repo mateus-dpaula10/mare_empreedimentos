@@ -253,12 +253,14 @@
     align-items:center;
     gap:12px;
     padding:13px 24px;
+    background:transparent;
     border:1px solid var(--gold);
     color:#f6f3ec;
     font-family:'Manrope', sans-serif;
     font-size:11px;
     letter-spacing:0.13em;
     text-transform:uppercase;
+    cursor:pointer;
     transition:background .4s ease, color .4s ease;
     white-space:nowrap;
   }
@@ -1188,7 +1190,7 @@
             <textarea rows="3"></textarea>
           </div>
           <div class="submit-row">
-            <button type="submit" class="btn" style="cursor:pointer;">Enviar mensagem</button>
+            <button type="submit" class="btn">Enviar mensagem</button>
             <span id="formMsg" style="opacity:0; transition:opacity .4s; margin-left:20px; font-size:12px; color:#a9a495;">Recebido — em breve retornaremos.</span>
           </div>
         </form>
