@@ -1181,7 +1181,7 @@
           </div>
           <div class="field">
             <label>Telefone</label>
-            <input type="tel">
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15">
           </div>
           <div class="field">
             <label>Mensagem</label>
@@ -1380,7 +1380,7 @@
           </div>
           <div class="field">
             <label>Telefone / WhatsApp</label>
-            <input type="tel" required>
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="field">
             <label>Tenho interesse em</label>
@@ -1530,7 +1530,7 @@
           </div>
           <div class="field">
             <label>Telefone / WhatsApp</label>
-            <input type="tel" required>
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1626,7 +1626,7 @@
           </div>
           <div class="field">
             <label>Telefone / WhatsApp</label>
-            <input type="tel" required>
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1722,7 +1722,7 @@
           </div>
           <div class="field">
             <label>Telefone / WhatsApp</label>
-            <input type="tel" required>
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1821,7 +1821,7 @@
           </div>
           <div class="field">
             <label>Telefone / WhatsApp</label>
-            <input type="tel" required>
+            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1875,6 +1875,25 @@
     if (msg) msg.style.opacity = 1;
     return false;
   }
+
+  function mascaraTelefone(valor) {
+    valor = valor.replace(/\D/g, '').slice(0, 11);
+    if (valor.length > 10) {
+      valor = valor.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (valor.length > 6) {
+      valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (valor.length > 2) {
+      valor = valor.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+    } else if (valor.length > 0) {
+      valor = valor.replace(/^(\d*)/, '($1');
+    }
+    return valor;
+  }
+  document.querySelectorAll('input.mask-tel').forEach(input => {
+    input.addEventListener('input', () => {
+      input.value = mascaraTelefone(input.value);
+    });
+  });
 
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
