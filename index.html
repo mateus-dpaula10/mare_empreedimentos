@@ -20,17 +20,21 @@
 <meta property="og:site_name" content="Mare Empreendimentos">
 <meta property="og:title" content="Mare Empreendimentos — Arquitetura para viver bem">
 <meta property="og:description" content="Arquitetura autoral e alto padrão em Porto Alegre e região. Conheça o Palazzo di Venezza, Milano, Roma, Verona e o Complexo Diamond.">
-<meta property="og:image" content="https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.jpg">
+<meta property="og:image" content="https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.webp">
 <meta property="og:url" content="https://mare-empreedimentos.vercel.app/">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mare Empreendimentos — Arquitetura para viver bem">
 <meta name="twitter:description" content="Arquitetura autoral e alto padrão em Porto Alegre e região.">
-<meta name="twitter:image" content="https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.jpg">
+<meta name="twitter:image" content="https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.webp">
+
+<link rel="preload" as="image" href="images/02-palazzo-di-venezza-1034-ao-entardecer.webp" fetchpriority="high">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 
 <script type="application/ld+json">
 {
@@ -39,7 +43,7 @@
   "name": "Mare Empreendimentos",
   "url": "https://mare-empreedimentos.vercel.app/",
   "logo": "https://mare-empreedimentos.vercel.app/images/01-mare-empreendimentos.png",
-  "image": "https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.jpg",
+  "image": "https://mare-empreedimentos.vercel.app/images/02-palazzo-di-venezza-1034-ao-entardecer.webp",
   "telephone": "+555130234429",
   "email": "mare@mareconstrutora.com.br",
   "sameAs": ["https://www.instagram.com/mare.empreendimentos/"]
@@ -52,6 +56,7 @@
     --navy-soft:#13263c;
     --gold:#b49a6e;
     --gold-light:#dcc9a0;
+    --gold-dark:#7a5e3a;
     --paper:#f2efe8;
     --paper-2:#e9e4d9;
     --ink:#171410;
@@ -89,6 +94,7 @@
     gap:14px;
     margin-bottom:22px;
   }
+  .sobre .eyebrow, .localizacao .eyebrow{color:var(--gold-dark);}
   .eyebrow::before{
     content:'';
     width:32px;
@@ -173,7 +179,64 @@
   nav a:hover::after{width:100%;}
   nav a.nav-highlight{color:var(--gold-light);}
   nav a.nav-highlight::after{background:var(--gold-light);}
-  .nav-toggle{display:none;}
+  .nav-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-end;
+    gap:5px;
+    width:32px;
+    height:24px;
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    z-index:110;
+  }
+  .nav-toggle span{
+    display:block;
+    width:100%;
+    height:2px;
+    background:#f6f3ec;
+    transition:transform .3s ease, opacity .3s ease, width .3s ease;
+  }
+  .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg); width:100%;}
+  .nav-toggle.active span:nth-child(2){opacity:0;}
+  .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg); width:100%;}
+  .nav-overlay{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(10,18,29,0.55);
+    z-index:104;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .nav-overlay.open{display:block; opacity:1;}
+
+  @media (max-width:980px){
+    header{padding:20px 24px;}
+    header.solid{padding:16px 24px;}
+    .nav-toggle{display:flex;}
+    nav ul{
+      position:fixed;
+      top:0; right:0;
+      height:100vh;
+      width:min(320px, 82vw);
+      background:rgba(10,18,29,0.98);
+      backdrop-filter:blur(14px);
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      gap:30px;
+      padding:100px 40px;
+      margin:0;
+      transform:translateX(100%);
+      transition:transform .4s ease;
+      z-index:105;
+    }
+    nav ul.open{transform:translateX(0);}
+    nav a{font-size:14px;}
+  }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -398,7 +461,7 @@
     background:var(--paper);
     border:1px solid var(--gold);
   }
-  .t-item h4{
+  .t-item h3{
     font-family:'Manrope', sans-serif;
     font-size:13px;
     color:var(--navy);
@@ -653,7 +716,7 @@
     font-size:12px;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    color:#7d7868;
+    color:#95907f;
   }
   .essencia-words span{position:relative; padding:0 14px;}
   .essencia-words span::after{
@@ -687,7 +750,7 @@
   }
   .num-item .n em{
     font-style:normal;
-    color:var(--gold);
+    color:var(--gold-dark);
     font-weight:600;
   }
   .num-item .l{
@@ -720,7 +783,7 @@
     max-width:420px;
   }
   .contato-info{margin-bottom:34px;}
-  .contato-info h4{
+  .contato-info h3{
     font-family:'Manrope', sans-serif;
     font-size:11px;
     letter-spacing:0.14em;
@@ -927,7 +990,7 @@
   .plan-card{background:#fff; border:1px solid var(--line); padding:20px;}
   .plan-card img{width:100%; height:auto;}
   .plan-card .cap{margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
-  .plan-card .cap h4{font-family:'Manrope',sans-serif; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:8px;}
+  .plan-card .cap h3{font-family:'Manrope',sans-serif; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:8px;}
   .plan-card .cap p{font-size:12.5px; color:var(--ink-soft); font-weight:300; line-height:1.7;}
 
   /* ---------- LOCALIZAÇÃO ---------- */
@@ -943,7 +1006,7 @@
   .prox-item:first-child{border-top:1px solid var(--line);}
   .prox-item .dot{width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0;}
   .prox-item .name{font-family:'Manrope',sans-serif; font-size:13.5px; color:var(--navy); font-weight:500;}
-  .prox-item .time{margin-left:auto; font-family:'Manrope',sans-serif; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); white-space:nowrap;}
+  .prox-item .time{margin-left:auto; font-family:'Manrope',sans-serif; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-dark); white-space:nowrap;}
 
   /* ---------- Venezza contato: lead extra + select ---------- */
   .contato p.lead{font-size:14.5px; color:#a9a495; line-height:1.8; font-weight:300; max-width:400px; margin-bottom:30px;}
@@ -970,9 +1033,12 @@
 <body>
 
 <header id="siteHeader">
-  <img class="logo-mark-img" src="images/01-mare-empreendimentos.png" alt="Mare Empreendimentos">
+  <img class="logo-mark-img" src="images/01-mare-empreendimentos.png" alt="Mare Empreendimentos" width="175" height="100">
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav">
+    <span></span><span></span><span></span>
+  </button>
   <nav>
-    <ul>
+    <ul id="siteNav">
       <li><a href="#inicio">Início</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#empreendimentos">Empreendimentos</a></li>
@@ -980,12 +1046,14 @@
       <li><a href="#contato">Contato</a></li>
     </ul>
   </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
 </header>
+<main>
 <div id="page-home">
 
 
 <section class="hero" id="inicio">
-  <img class="hero-img" src="images/02-palazzo-di-venezza-1034-ao-entardecer.jpg" alt="Palazzo di Venezza 1034 ao entardecer">
+  <img class="hero-img" width="1300" height="1300" fetchpriority="high" src="images/02-palazzo-di-venezza-1034-ao-entardecer.webp" alt="Palazzo di Venezza 1034 ao entardecer">
   <div class="hero-content">
     <h1>Construímos lugares<br>que <em>permanecem</em>.</h1>
     <p>Arquitetura autoral, localização privilegiada e um olhar atento a cada detalhe, do litoral gaúcho a Porto Alegre.</p>
@@ -1009,15 +1077,15 @@
 
         <div class="timeline">
           <div class="t-item">
-            <h4>2006</h4>
+            <h3>2006</h3>
             <p>Origem no litoral gaúcho, com residências de alto padrão.</p>
           </div>
           <div class="t-item">
-            <h4>2016</h4>
+            <h3>2016</h3>
             <p>Início das edificações, expandindo a atuação da Mare.</p>
           </div>
           <div class="t-item">
-            <h4>Hoje</h4>
+            <h3>Hoje</h3>
             <p>Empresa sólida, com atuação em todo o Rio Grande do Sul.</p>
           </div>
         </div>
@@ -1062,7 +1130,7 @@
       <a class="slide" href="#venezza">
         <div class="frame">
           <span class="tag">Lançamento</span>
-          <img src="images/03-palazzo-di-venezza-1034.jpg" alt="Palazzo di Venezza 1034">
+          <img width="1300" height="1300" loading="lazy" src="images/03-palazzo-di-venezza-1034.webp" alt="Palazzo di Venezza 1034">
           <div class="slide-overlay">
             <div class="loc">Zona Sul · Porto Alegre</div>
             <h3>Palazzo di Venezza 1034</h3>
@@ -1071,7 +1139,7 @@
       </a>
       <a class="slide" href="#milano">
         <div class="frame">
-          <img src="images/04-palazzo-di-milano.jpg" alt="Palazzo di Milano">
+          <img width="832" height="1130" loading="lazy" src="images/04-palazzo-di-milano.webp" alt="Palazzo di Milano">
           <div class="slide-overlay">
             <div class="loc">Porto Alegre</div>
             <h3>Palazzo di Milano</h3>
@@ -1080,7 +1148,7 @@
       </a>
       <a class="slide" href="#roma">
         <div class="frame">
-          <img src="images/05-palazzo-di-roma.jpg" alt="Palazzo di Roma">
+          <img width="960" height="1280" loading="lazy" src="images/05-palazzo-di-roma.webp" alt="Palazzo di Roma">
           <div class="slide-overlay">
             <div class="loc">Porto Alegre</div>
             <h3>Palazzo di Roma</h3>
@@ -1089,7 +1157,7 @@
       </a>
       <a class="slide" href="#verona">
         <div class="frame">
-          <img src="images/06-palazzo-di-verona.jpg" alt="Palazzo di Verona">
+          <img width="960" height="1280" loading="lazy" src="images/06-palazzo-di-verona.webp" alt="Palazzo di Verona">
           <div class="slide-overlay">
             <div class="loc">Porto Alegre</div>
             <h3>Palazzo di Verona</h3>
@@ -1098,7 +1166,7 @@
       </a>
       <a class="slide" href="#diamond">
         <div class="frame">
-          <img src="images/07-complexo-diamond-em-guapore.jpg" alt="Complexo Diamond em Guaporé">
+          <img width="1280" height="624" loading="lazy" src="images/07-complexo-diamond-em-guapore.webp" alt="Complexo Diamond em Guaporé">
           <div class="slide-overlay">
             <div class="loc">Guaporé · RS</div>
             <h3>Complexo Diamond</h3>
@@ -1115,9 +1183,9 @@
 </section>
 
 <section class="banner-slider" id="bannerSlider">
-  <div class="banner-slide active"><img src="images/08-orla-de-porto-alegre.jpg" alt="Orla de Porto Alegre"></div>
-  <div class="banner-slide"><img src="images/09-centro-historico-de-porto-alegre.jpg" alt="Centro histórico de Porto Alegre"></div>
-  <div class="banner-slide"><img src="images/10-porto-alegre.jpg" alt="Porto Alegre"></div>
+  <div class="banner-slide active"><img width="1000" height="667" loading="lazy" src="images/08-orla-de-porto-alegre.webp" alt="Orla de Porto Alegre"></div>
+  <div class="banner-slide"><img width="960" height="640" loading="lazy" src="images/09-centro-historico-de-porto-alegre.webp" alt="Centro histórico de Porto Alegre"></div>
+  <div class="banner-slide"><img width="1500" height="999" loading="lazy" src="images/10-porto-alegre.webp" alt="Porto Alegre"></div>
   <button class="banner-arrow left" id="bannerPrev" aria-label="Anterior">
     <svg width="22" height="14" viewBox="0 0 22 14" fill="none"><path d="M22 7H1M1 7L8 1M1 7L8 13" stroke="currentColor" stroke-width="1.2"/></svg>
   </button>
@@ -1155,39 +1223,39 @@
         <div class="eyebrow">Contato</div>
         <h2>Vamos construir juntos o seu próximo capítulo.</h2>
         <div class="contato-info">
-          <h4>Endereço</h4>
+          <h3>Endereço</h3>
           <p>Av. Diário de Notícias, 400 — Sala 2011<br>Diamond Tower, Porto Alegre – RS</p>
         </div>
         <div class="contato-info">
-          <h4>E-mail</h4>
+          <h3>E-mail</h3>
           <a href="mailto:mare@mareconstrutora.com.br">mare@mareconstrutora.com.br</a>
         </div>
         <div class="contato-info">
-          <h4>Vendas</h4>
+          <h3>Vendas</h3>
           <a href="tel:+555130234429">(51) 3023-4429</a>
         </div>
         <div class="contato-info">
-          <h4>Fornecedores</h4>
+          <h3>Fornecedores</h3>
           <a href="tel:+555136258178">(51) 3625-8178</a>
         </div>
       </div>
       <div class="reveal">
         <form data-projeto="Site institucional" onsubmit="return enviarWhatsApp(event, this, 'formMsg');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="homeNome">Nome</label>
+            <input type="text" id="homeNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="homeEmail">E-mail</label>
+            <input type="email" id="homeEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15">
+            <label for="homeTelefone">Telefone</label>
+            <input type="tel" id="homeTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15">
           </div>
           <div class="field">
-            <label>Mensagem</label>
-            <textarea rows="3"></textarea>
+            <label for="homeMensagem">Mensagem</label>
+            <textarea id="homeMensagem" name="mensagem" rows="3"></textarea>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Enviar mensagem</button>
@@ -1216,7 +1284,7 @@
 
 <div id="page-venezza" style="display:none;">
 <section class="hero venezza-hero" id="venezza">
-  <img class="hero-img" src="images/11-palazzo-di-venezza-1034.jpg" alt="Palazzo di Venezza 1034">
+  <img class="hero-img" width="1300" height="1300" loading="lazy" src="images/11-palazzo-di-venezza-1034.webp" alt="Palazzo di Venezza 1034">
   <div class="hero-content">
     <a href="#inicio" class="back-link">&larr; Início</a>
     <div class="eyebrow">Lançamento · Zona Sul · Tristeza</div>
@@ -1255,7 +1323,7 @@
         </div>
       </div>
       <div class="reveal sobre-photo">
-        <img src="images/12-lobby-do-palazzo-di-venezza.jpg" alt="Lobby do Palazzo di Venezza">
+        <img width="1300" height="1300" loading="lazy" src="images/12-lobby-do-palazzo-di-venezza.webp" alt="Lobby do Palazzo di Venezza">
       </div>
     </div>
   </div>
@@ -1269,27 +1337,27 @@
     </div>
     <div class="amenity-grid reveal">
       <div class="amenity">
-        <img src="images/13-rooftop-exclusivo.jpg" alt="Rooftop exclusivo">
+        <img width="1300" height="1300" loading="lazy" src="images/13-rooftop-exclusivo.webp" alt="Rooftop exclusivo">
         <div class="label"><h3>Rooftop exclusivo</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/14-fitness-com-vista.jpg" alt="Fitness com vista">
+        <img width="1208" height="1510" loading="lazy" src="images/14-fitness-com-vista.webp" alt="Fitness com vista">
         <div class="label"><h3>Fitness com vista</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/15-lounge-externo-com-fireplace.jpg" alt="Lounge externo com fireplace">
+        <img width="1208" height="1510" loading="lazy" src="images/15-lounge-externo-com-fireplace.webp" alt="Lounge externo com fireplace">
         <div class="label"><h3>Lounge externo com fireplace</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/16-lobby-assinado.jpg" alt="Lobby assinado">
+        <img width="1300" height="1300" loading="lazy" src="images/16-lobby-assinado.webp" alt="Lobby assinado">
         <div class="label"><h3>Lobby assinado</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/17-seguranca-por-reconhecimento-facial.jpg" alt="Segurança por reconhecimento facial">
+        <img width="1300" height="1300" loading="lazy" src="images/17-seguranca-por-reconhecimento-facial.webp" alt="Segurança por reconhecimento facial">
         <div class="label"><h3>Segurança por reconhecimento facial</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/18-salao-de-festas.jpg" alt="Salão de festas">
+        <img width="804" height="768" loading="lazy" src="images/18-salao-de-festas.webp" alt="Salão de festas">
         <div class="label"><h3>Salão de festas</h3></div>
       </div>
     </div>
@@ -1308,32 +1376,32 @@
     </div>
     <div class="tab-panel active" id="dorm2">
       <div class="plan-card">
-        <img src="images/19-planta-2-dormitorios-opcao-a.jpg" alt="Planta 2 dormitórios — opção A">
+        <img width="900" height="506" loading="lazy" src="images/19-planta-2-dormitorios-opcao-a.webp" alt="Planta 2 dormitórios — opção A">
         <div class="cap">
-          <h4>2 Dormitórios — Opção A</h4>
+          <h3>2 Dormitórios — Opção A</h3>
           <p>Suíte 9,12 m² · Dormitório 6,87 m² · Living integrado 20,47 m²</p>
         </div>
       </div>
       <div class="plan-card">
-        <img src="images/20-planta-2-dormitorios-opcao-b.jpg" alt="Planta 2 dormitórios — opção B">
+        <img width="900" height="506" loading="lazy" src="images/20-planta-2-dormitorios-opcao-b.webp" alt="Planta 2 dormitórios — opção B">
         <div class="cap">
-          <h4>2 Dormitórios — Opção B</h4>
+          <h3>2 Dormitórios — Opção B</h3>
           <p>Suíte 9,12 m² · Dormitório 6,87 m² · Living integrado 20,47 m²</p>
         </div>
       </div>
     </div>
     <div class="tab-panel" id="dorm3">
       <div class="plan-card">
-        <img src="images/21-planta-3-dormitorios-opcao-a.jpg" alt="Planta 3 dormitórios — opção A">
+        <img width="900" height="506" loading="lazy" src="images/21-planta-3-dormitorios-opcao-a.webp" alt="Planta 3 dormitórios — opção A">
         <div class="cap">
-          <h4>3 Dormitórios — Opção A</h4>
+          <h3>3 Dormitórios — Opção A</h3>
           <p>Suíte 12,66 m² · Dormitórios 7,69 m² e 12,66 m² · Living integrado 25,75 m²</p>
         </div>
       </div>
       <div class="plan-card">
-        <img src="images/22-planta-3-dormitorios-opcao-b.jpg" alt="Planta 3 dormitórios — opção B">
+        <img width="900" height="506" loading="lazy" src="images/22-planta-3-dormitorios-opcao-b.webp" alt="Planta 3 dormitórios — opção B">
         <div class="cap">
-          <h4>3 Dormitórios — Opção B</h4>
+          <h3>3 Dormitórios — Opção B</h3>
           <p>Suíte 12,66 m² · Dormitórios 7,02 m² e 7,60 m² · Living integrado 25,75 m²</p>
         </div>
       </div>
@@ -1373,20 +1441,20 @@
       <div class="reveal">
         <form data-projeto="Palazzo di Venezza 1034" onsubmit="return enviarWhatsApp(event, this, 'formMsgVenezza');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="venezzaNome">Nome</label>
+            <input type="text" id="venezzaNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="venezzaEmail">E-mail</label>
+            <input type="email" id="venezzaEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
+            <label for="venezzaTelefone">Telefone / WhatsApp</label>
+            <input type="tel" id="venezzaTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="field">
-            <label>Tenho interesse em</label>
-            <select>
+            <label for="venezzaInteresse">Tenho interesse em</label>
+            <select id="venezzaInteresse" name="interesse">
               <option>2 dormitórios</option>
               <option>3 dormitórios</option>
               <option>Ainda não sei</option>
@@ -1422,7 +1490,7 @@
 
 <div id="page-milano" style="display:none;">
 <section class="hero venezza-hero" id="milano">
-  <img class="hero-img" src="images/23-fachada-do-palazzo-di-milano.jpg" alt="Fachada do Palazzo di Milano">
+  <img class="hero-img" width="1333" height="2000" loading="lazy" src="images/23-fachada-do-palazzo-di-milano.webp" alt="Fachada do Palazzo di Milano">
   <div class="hero-content">
     <a href="#empreendimentos" class="back-link">&larr; Empreendimentos</a>
     <div class="eyebrow">Porto Alegre</div>
@@ -1448,7 +1516,7 @@
         </div>
       </div>
       <div class="reveal sobre-photo">
-        <img src="images/24-living-integrado-de-apartamento-do-palazzo-di-mila.jpg" alt="Living integrado de apartamento do Palazzo di Milano">
+        <img width="1400" height="933" loading="lazy" src="images/24-living-integrado-de-apartamento-do-palazzo-di-mila.webp" alt="Living integrado de apartamento do Palazzo di Milano">
       </div>
     </div>
   </div>
@@ -1462,35 +1530,35 @@
     </div>
     <div class="amenity-grid reveal">
       <div class="amenity">
-        <img src="images/25-living-integrado-do-apartamento.jpg" alt="Living integrado do apartamento">
+        <img width="900" height="599" loading="lazy" src="images/25-living-integrado-do-apartamento.webp" alt="Living integrado do apartamento">
         <div class="label"><h3>Living integrado</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/26-cozinha-planejada-do-apartamento.jpg" alt="Cozinha planejada do apartamento">
+        <img width="900" height="599" loading="lazy" src="images/26-cozinha-planejada-do-apartamento.webp" alt="Cozinha planejada do apartamento">
         <div class="label"><h3>Cozinha planejada</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/27-salao-de-festas.jpg" alt="Salão de festas">
+        <img width="900" height="599" loading="lazy" src="images/27-salao-de-festas.webp" alt="Salão de festas">
         <div class="label"><h3>Salão de festas</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/28-espaco-gourmet-do-salao-de-festas.jpg" alt="Espaço gourmet do salão de festas">
+        <img width="900" height="599" loading="lazy" src="images/28-espaco-gourmet-do-salao-de-festas.webp" alt="Espaço gourmet do salão de festas">
         <div class="label"><h3>Espaço gourmet</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/29-lounge-de-espera.jpg" alt="Lounge de espera">
+        <img width="900" height="599" loading="lazy" src="images/29-lounge-de-espera.webp" alt="Lounge de espera">
         <div class="label"><h3>Lounge de espera</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/30-terraco-do-salao-de-festas.jpg" alt="Terraço do salão de festas">
+        <img width="900" height="599" loading="lazy" src="images/30-terraco-do-salao-de-festas.webp" alt="Terraço do salão de festas">
         <div class="label"><h3>Terraço do salão de festas</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/31-garagem-privativa.jpg" alt="Garagem privativa">
+        <img width="900" height="599" loading="lazy" src="images/31-garagem-privativa.webp" alt="Garagem privativa">
         <div class="label"><h3>Garagem privativa</h3></div>
       </div>
       <div class="amenity">
-        <img src="images/32-portaria-e-entrada-do-edificio.jpg" alt="Portaria e entrada do edifício">
+        <img width="900" height="599" loading="lazy" src="images/32-portaria-e-entrada-do-edificio.webp" alt="Portaria e entrada do edifício">
         <div class="label"><h3>Portaria e entrada</h3></div>
       </div>
     </div>
@@ -1523,16 +1591,16 @@
       <div class="reveal">
         <form data-projeto="Palazzo di Milano" onsubmit="return enviarWhatsApp(event, this, 'formMsgMilano');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="milanoNome">Nome</label>
+            <input type="text" id="milanoNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="milanoEmail">E-mail</label>
+            <input type="email" id="milanoEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
+            <label for="milanoTelefone">Telefone / WhatsApp</label>
+            <input type="tel" id="milanoTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1561,7 +1629,7 @@
 
 <div id="page-roma" style="display:none;">
 <section class="hero venezza-hero" id="roma">
-  <img class="hero-img" src="images/33-palazzo-di-roma.jpg" alt="Palazzo di Roma">
+  <img class="hero-img" width="960" height="1280" loading="lazy" src="images/33-palazzo-di-roma.webp" alt="Palazzo di Roma">
   <div class="hero-content">
     <a href="#empreendimentos" class="back-link">&larr; Empreendimentos</a>
     <div class="eyebrow">Porto Alegre</div>
@@ -1587,7 +1655,7 @@
         </div>
       </div>
       <div class="reveal sobre-photo">
-        <img src="images/34-palazzo-di-roma.jpg" alt="Palazzo di Roma">
+        <img width="960" height="1280" loading="lazy" src="images/34-palazzo-di-roma.webp" alt="Palazzo di Roma">
       </div>
     </div>
   </div>
@@ -1619,16 +1687,16 @@
       <div class="reveal">
         <form data-projeto="Palazzo di Roma" onsubmit="return enviarWhatsApp(event, this, 'formMsgRoma');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="romaNome">Nome</label>
+            <input type="text" id="romaNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="romaEmail">E-mail</label>
+            <input type="email" id="romaEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
+            <label for="romaTelefone">Telefone / WhatsApp</label>
+            <input type="tel" id="romaTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1657,7 +1725,7 @@
 
 <div id="page-verona" style="display:none;">
 <section class="hero venezza-hero" id="verona">
-  <img class="hero-img" src="images/35-palazzo-di-verona.jpg" alt="Palazzo di Verona">
+  <img class="hero-img" width="960" height="1280" loading="lazy" src="images/35-palazzo-di-verona.webp" alt="Palazzo di Verona">
   <div class="hero-content">
     <a href="#empreendimentos" class="back-link">&larr; Empreendimentos</a>
     <div class="eyebrow">Porto Alegre</div>
@@ -1683,7 +1751,7 @@
         </div>
       </div>
       <div class="reveal sobre-photo">
-        <img src="images/36-palazzo-di-verona.jpg" alt="Palazzo di Verona">
+        <img width="960" height="1280" loading="lazy" src="images/36-palazzo-di-verona.webp" alt="Palazzo di Verona">
       </div>
     </div>
   </div>
@@ -1715,16 +1783,16 @@
       <div class="reveal">
         <form data-projeto="Palazzo di Verona" onsubmit="return enviarWhatsApp(event, this, 'formMsgVerona');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="veronaNome">Nome</label>
+            <input type="text" id="veronaNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="veronaEmail">E-mail</label>
+            <input type="email" id="veronaEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
+            <label for="veronaTelefone">Telefone / WhatsApp</label>
+            <input type="tel" id="veronaTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1753,7 +1821,7 @@
 
 <div id="page-diamond" style="display:none;">
 <section class="hero venezza-hero" id="diamond">
-  <img class="hero-img" src="images/37-complexo-diamond-em-guapore.jpg" alt="Complexo Diamond em Guaporé">
+  <img class="hero-img" width="1280" height="624" loading="lazy" src="images/37-complexo-diamond-em-guapore.webp" alt="Complexo Diamond em Guaporé">
   <div class="hero-content">
     <a href="#empreendimentos" class="back-link">&larr; Empreendimentos</a>
     <div class="eyebrow">Guaporé · RS</div>
@@ -1782,7 +1850,7 @@
         </div>
       </div>
       <div class="reveal sobre-photo">
-        <img src="images/38-complexo-diamond-em-guapore.jpg" alt="Complexo Diamond em Guaporé">
+        <img width="1280" height="636" loading="lazy" src="images/38-complexo-diamond-em-guapore.webp" alt="Complexo Diamond em Guaporé">
       </div>
     </div>
   </div>
@@ -1814,16 +1882,16 @@
       <div class="reveal">
         <form data-projeto="Complexo Diamond" onsubmit="return enviarWhatsApp(event, this, 'formMsgDiamond');">
           <div class="field">
-            <label>Nome</label>
-            <input type="text" required>
+            <label for="diamondNome">Nome</label>
+            <input type="text" id="diamondNome" name="nome" required>
           </div>
           <div class="field">
-            <label>E-mail</label>
-            <input type="email" required>
+            <label for="diamondEmail">E-mail</label>
+            <input type="email" id="diamondEmail" name="email" required>
           </div>
           <div class="field">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
+            <label for="diamondTelefone">Telefone / WhatsApp</label>
+            <input type="tel" id="diamondTelefone" name="telefone" class="mask-tel" placeholder="(51) 99999-9999" maxlength="15" required>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn">Quero receber informações</button>
@@ -1849,6 +1917,7 @@
   </div>
 </footer>
 </div>
+</main>
 
 <a class="wa-float" href="https://wa.me/5551997121250?text=Ol%C3%A1!%20Tenho%20interesse%20nos%20empreendimentos%20da%20Mare." target="_blank" aria-label="Fale conosco no WhatsApp">
   <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1896,6 +1965,34 @@
       input.value = mascaraTelefone(input.value);
     });
   });
+
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const navList = document.getElementById('siteNav');
+    const overlay = document.getElementById('navOverlay');
+    if (!toggle || !navList || !overlay) return;
+
+    function closeMenu(){
+      navList.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    function openMenu(){
+      navList.classList.add('open');
+      overlay.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    toggle.addEventListener('click', () => {
+      if (navList.classList.contains('open')) closeMenu(); else openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+    navList.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth > 980) closeMenu(); });
+  })();
 
   const header = document.getElementById('siteHeader');
   window.addEventListener('scroll', () => {
@@ -1964,8 +2061,12 @@
     });
     const dots = dotsWrap.querySelectorAll('.dot');
 
+    let cachedStep = slides[0].getBoundingClientRect().width + 22;
+    window.addEventListener('resize', () => {
+      cachedStep = slides[0].getBoundingClientRect().width + 22;
+    });
     function slideStep(){
-      return slides[0].getBoundingClientRect().width + 22;
+      return cachedStep;
     }
     function scrollToSlide(i){
       track.scrollTo({left: i * slideStep(), behavior:'smooth'});
